@@ -8,7 +8,8 @@ public class FileEncryptionService
 {
     public void EncryptFile(string sourcePath, string destinationPath)
     {
-        if (string.IsNullOrWhiteSpace(sourcePath) || string.IsNullOrWhiteSpace(destinationPath))
+        if (string.IsNullOrWhiteSpace(sourcePath) ||
+            string.IsNullOrWhiteSpace(destinationPath))
         {
             Console.WriteLine("Пути к файлам не должны быть пустыми.");
             return;
@@ -20,32 +21,45 @@ public class FileEncryptionService
             return;
         }
 
-        byte[] key = RandomNumberGenerator.GetBytes(32);
-        byte[] iv = RandomNumberGenerator.GetBytes(16);
+        try
+        {
+            byte[] key = RandomNumberGenerator.GetBytes(32);
+            byte[] iv = RandomNumberGenerator.GetBytes(16);
 
-        using Aes aes = Aes.Create();
-        aes.Key = key;
-        aes.IV = iv;
+            using Aes aes = Aes.Create();
+            aes.Key = key;
+            aes.IV = iv;
 
-        using FileStream inputFile = new FileStream(
-            sourcePath,
-            FileMode.Open,
-            FileAccess.Read);
+            using FileStream inputFile = new FileStream(
+                sourcePath,
+                FileMode.Open,
+                FileAccess.Read);
 
-        using FileStream outputFile = new FileStream(
-            destinationPath,
-            FileMode.Create,
-            FileAccess.Write);
+            using FileStream outputFile = new FileStream(
+                destinationPath,
+                FileMode.Create,
+                FileAccess.Write);
 
-        outputFile.Write(iv, 0, iv.Length);
+            outputFile.Write(iv, 0, iv.Length);
 
-        using CryptoStream cryptoStream = new CryptoStream(
-            outputFile,
-            aes.CreateEncryptor(),
-            CryptoStreamMode.Write);
+            using CryptoStream cryptoStream = new CryptoStream(
+                outputFile,
+                aes.CreateEncryptor(),
+                CryptoStreamMode.Write);
 
-        inputFile.CopyTo(cryptoStream);
+            inputFile.CopyTo(cryptoStream);
 
-        Console.WriteLine("Файл успешно зашифрован.");
+            Console.WriteLine("Файл успешно зашифрован.");
+        }
+        catch (IOException ex)
+        {
+            Console.WriteLine(
+                $"Ошибка работы с файлом: {ex.Message}");
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            Console.WriteLine(
+                $"Ошибка доступа к файлу: {ex.Message}");
+        }
     }
 }
