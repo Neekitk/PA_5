@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigitalUniversityArchive")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3179c2a89406d1be755509a72bb7652f343ee13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52325429268d0095fc7edc54204a82c974d6365d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DigitalUniversityArchive")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DigitalUniversityArchive")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

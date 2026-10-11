@@ -4,4 +4,4 @@ Console.WriteLine("АИС «Цифровой университетский ар
 
 FileEncryptionService encryptionService = new FileEncryptionService();
 
-Console.WriteLine("Модуль шифрования файлов подключен.");
+Console.WriteLine("Модуль шифрования файлов готов к тестированию.");
