@@ -8,6 +8,12 @@ public class FileEncryptionService
 {
     public void EncryptFile(string sourcePath, string destinationPath)
     {
+        if (!File.Exists(sourcePath))
+        {
+            Console.WriteLine("Исходный файл не найден.");
+            return;
+        }
+
         byte[] key = RandomNumberGenerator.GetBytes(32);
         byte[] iv = RandomNumberGenerator.GetBytes(16);
 
