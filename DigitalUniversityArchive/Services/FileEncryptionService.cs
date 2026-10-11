@@ -8,6 +8,12 @@ public class FileEncryptionService
 {
     public void EncryptFile(string sourcePath, string destinationPath)
     {
+        if (string.IsNullOrWhiteSpace(sourcePath) || string.IsNullOrWhiteSpace(destinationPath))
+        {
+            Console.WriteLine("Пути к файлам не должны быть пустыми.");
+            return;
+        }
+
         if (!File.Exists(sourcePath))
         {
             Console.WriteLine("Исходный файл не найден.");
